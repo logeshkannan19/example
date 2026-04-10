@@ -1,0 +1,42 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #000;
+    font-family: 'Inter', sans-serif;
+}
+
+canvas {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#input-video {
+    display: none;
+}
+
+#loading-msg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #00ffff;
+    font-size: 1.2rem;
+    text-align: center;
+    pointer-events: none;
+    z-index: 10;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px 40px;
+    border-radius: 12px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+#loading-msg small {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #0088ff;
+}
