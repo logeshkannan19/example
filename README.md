@@ -12,7 +12,7 @@ A browser-based 3D visualization of Saturn featuring interactive particle physic
 
 ## Live Demo
 
-Check it out live: [https://mavi-saturn.vercel.app](https://mavi-saturn.vercel.app)
+Check it out live: [https://saturn-particle-nexus.vercel.app](https://saturn-particle-nexus.vercel.app)
 
 ## Features
 
