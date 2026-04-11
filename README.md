@@ -8,7 +8,7 @@ A browser-based 3D visualization of Saturn featuring interactive particle physic
 
 ## Overview
 
-3D Mavi Saturn renders a blue-hued Saturn with its ring system using Three.js. Users interact with particle dynamics via webcam hand tracking. The project demonstrates seamless integration of computer vision with 3D graphics, creating an immersive experience where hand gestures control particle behavior in real time.
+Saturn Particle Nexus renders a blue-hued Saturn with its ring system using Three.js. Users interact with particle dynamics via webcam hand tracking. The project demonstrates seamless integration of computer vision with 3D graphics, creating an immersive experience where hand gestures control particle behavior in real time.
 
 ## Live Demo
 
