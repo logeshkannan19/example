@@ -1,4 +1,4 @@
-# 3D Mavi Saturn - Interactive Particle Simulation
+# Saturn Particle Nexus
 
 A browser-based 3D visualization of Saturn featuring interactive particle physics and real-time hand tracking powered by MediaPipe.
 
