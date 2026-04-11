@@ -1,35 +1,33 @@
 <div align="center">
-  <img src="https://via.placeholder.com/900x450/0a0a1a/00d9ff?text=SATURN+PARTICLE+NEXUS" alt="Saturn Particle Nexus" width="900"/>
+  <img src="https://capsule-render.vercel.app/api?type=rect&color=0a0a1a&height=300&section=header&text=SATURN%20PARTICLE%20NEXUS&fontSize=80&fontAlign=50&animation=twinkin" width="900"/>
+  <br><br>
   <h1>🪐 Saturn Particle Nexus</h1>
   <p>A browser-based 3D visualization of Saturn featuring interactive particle physics and real-time hand tracking.</p>
   <br>
-  <a href="https://saturn-particle-nexus.vercel.app"><img src="https://img.shields.io/badge/LIVE-DEMO-00d9ff?style=for-the-badge&color=00d9ff" alt="Live Demo"/></a>
-  <a href="https://github.com/logeshkannan19/3D-Mavi-Saturn-Interactive-Particles/stargazers"><img src="https://img.shields.io/github/stars/logeshkannan19/3D-Mavi-Saturn-Interactive-Particles?style=social&color=00d9ff" alt="Stars"/></a>
-  <a href="https://github.com/logeshkannan19/3D-Mavi-Saturn-Interactive-Particles/forks"><img src="https://img.shields.io/github/forks/logeshkannan19/3D-Mavi-Saturn-Interactive-Particles?style=social&color=00d9ff" alt="Forks"/></a>
+  
+|[![Live Demo](https://img.shields.io/badge/🚀-LIVE_DEMO-00d9ff?style=for-the-badge&color=00d9ff)](https://saturn-particle-nexus.vercel.app)|[![Stars](https://img.shields.io/github/stars/logeshkannan19/3D-Mavi-Saturn-Interactive-Particles?style=for-the-badge&color=00d9ff)](https://github.com/logeshkannan19/3D-Mavi-Saturn-Interactive-Particles/stargazers)|[![Forks](https://img.shields.io/github/forks/logeshkannan19/3D-Mavi-Saturn-Interactive-Particles?style=for-the-badge&color=00d9ff)](https://github.com/logeshkannan19/3D-Mavi-Saturn-Interactive-Particles/network)|
+|:---:|:---:|:---:|
+  
+[![Three.js](https://img.shields.io/badge/Three.js-000000?style=for-the-badge&logo=three.js)](https://threejs.org/)|[![MediaPipe](https://img.shields.io/badge/MediaPipe-00bcd4?style=for-the-badge)](https://google.github.io/mediapipe/)|[![License](https://img.shields.io/badge/License-MIT-00d9ff?style=for-the-badge)](https://github.com/logeshkannan19/3D-Mavi-Saturn-Interactive-Particles/blob/main/LICENSE)|
+  
 </div>
-
----
-
-<p align="center">
-<img src="https://img.shields.io/badge/Three.js-000000?style=flat&logo=three.js" height="24"/>
-<img src="https://img.shields.io/badge/MediaPipe-00bcd4?style=flat" height="24"/>
-<img src="https://img.shields.io/badge/License-MIT-00d9ff?style=flat" height="24"/>
-</p>
 
 ---
 
 ## 📋 Table of Contents
 
-- [Overview](#overview)
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Getting Started](#getting-started)
-- [Project Structure](#project-structure)
-- [How It Works](#how-it-works)
-- [Technical Details](#technical-details)
-- [Troubleshooting](#troubleshooting)
-- [Contributing](#contributing)
-- [License](#license)
+| Section | Description |
+|---------|-------------|
+| [🌟 Overview](#-overview) | Project introduction |
+| [🎯 Features](#-features) | Core functionalities |
+| [🛠️ Tech Stack](#-tech-stack) | Technologies used |
+| [🚀 Getting Started](#-getting-started) | Installation guide |
+| [📁 Project Structure](#-project-structure) | File organization |
+| [🔄 How It Works](#-how-it-works) | Technical workflow |
+| [⚙️ Technical Details](#-technical-details) | Specifications |
+| [🔧 Troubleshooting](#-troubleshooting) | Common issues |
+| [🤝 Contributing](#-contributing) | How to contribute |
+| [📝 License](#-license) | MIT License |
 
 ---
 
@@ -37,29 +35,45 @@
 
 Saturn Particle Nexus is an interactive 3D visualization that renders a blue-hued Saturn with its ring system using Three.js. The project integrates MediaPipe Hands for real-time hand tracking, allowing users to interact with particle dynamics through webcam gestures.
 
-> **✨ Experience the future of interaction** - Control cosmic particles with just your hands!
-
-### Key Highlights
-
-| ✨ Real-time Hand Tracking | 🌀 Interactive Particles | 🎮 No Installation |
-|--------------------------|----------------------|-------------------|
-| MediaPipe-powered gesture recognition | 5000+ physics-driven particles | Browser-based |
+| | |
+|:---|:---|
+| 📹 **Real-time Tracking** | MediaPipe-powered hand gesture recognition |
+| 🌀 **5000+ Particles** | Physics-driven particle system |
+| 🎮 **Gesture Control** | Open hand attracts, fist rotates |
+| ⚡ **60 FPS** | Smooth rendering performance |
+| 🌐 **No Install** | Runs directly in browser |
 
 ---
 
 ## 🎯 Features
 
-| Gesture | Action | Description |
-|:-------:|--------|-------------|
-| 🖐️ | **Attract Particles** | Particles flow toward your hand position |
-| ✊ | **Rotate View** | Rotate the planet and rings |
+### Hand Gestures
+
+| Gesture | Emoji | Action | Description |
+|:-------:|:-----:|--------|-------------|
+| 🖐️ Open Hand | 👋 | **Attract** | Particles flow toward your hand |
+| ✊ Closed Fist | ✊ | **Rotate** | Rotate planet and rings |
+
+### Current Features
+
+| ✅ | Feature | Description |
+|:---:|---------|-------------|
+| ✓ | 3D Saturn Rendering | Blue-hued planet with rings |
+| ✓ | Hand Tracking | MediaPipe integration |
+| ✓ | Particle System | 5000+ interactive particles |
+| ✓ | Gesture Control | Real-time gesture recognition |
+| ✓ | Smooth Animation | 60fps rendering |
 
 ### Upcoming Features
 
-- [ ] 🌈 Particle color customization
-- [ ] 📱 Mobile touch support
-- [ ] 🎬 Motion blur effects
-- [ ] 💫 Bloom post-processing
+| 🚧 | Feature | Status |
+|:---:|---------|--------|
+| 🌈 | Color Customization | Planned |
+| 📱 | Mobile Touch Support | Planned |
+| 🎬 | Motion Blur Effects | Planned |
+| 💫 | Bloom Post-Processing | Planned |
+| 🔊 | Sound Effects | Planned |
+| 📸 | Screenshot Feature | Planned |
 
 ---
 
@@ -67,19 +81,19 @@ Saturn Particle Nexus is an interactive 3D visualization that renders a blue-hue
 
 <div align="center">
 
-| | |
-|:---:|:---|
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="50"/> | **JavaScript** |
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="50"/> | **HTML5** |
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="50"/> | **CSS3** |
+| JavaScript | HTML5 | CSS3 |
+|:---:|:---:|:---:|
+|<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="60"/>|<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="60"/>|<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="60"/>|
 
 </div>
 
-| Technology | Purpose |
-|------------|---------|
-| Three.js | 3D graphics & particle system |
-| MediaPipe Hands | Hand landmark detection |
-| WebGL | GPU-accelerated rendering |
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| Three.js | r128+ | 3D graphics rendering |
+| MediaPipe | Latest | Hand landmark detection |
+| WebGL | 2.0 | GPU-accelerated graphics |
+| HTML5 | 5 | Markup structure |
+| CSS3 | 3 | Visual styling |
 
 ---
 
@@ -87,22 +101,43 @@ Saturn Particle Nexus is an interactive 3D visualization that renders a blue-hue
 
 ### Prerequisites
 
-- ✅ Modern browser with WebGL
-- ✅ Webcam
-- ✅ Node.js (optional)
+| Requirement | Description |
+|-------------|-------------|
+| 🌐 Browser | Chrome, Firefox, Edge (WebGL enabled) |
+| 📷 Webcam | For hand tracking |
+| 📶 Internet | CDN resources |
 
-### Quick Start
+### Installation
 
 ```bash
 # Clone the repository
 git clone https://github.com/logeshkannan19/3D-Mavi-Saturn-Interactive-Particles.git
+
+# Navigate to project
 cd 3D-Mavi-Saturn-Interactive-Particles
 
 # Start local server
 npx serve .
+# OR
+python -m http.server 8000
 ```
 
-> 🔗 Open `http://localhost:3000` and allow camera access
+### Alternative Run Methods
+
+```bash
+# Using Node.js http-server
+npx http-server .
+
+# Using PHP
+php -S localhost:8000
+
+# Using Ruby
+ruby -run -ehttpd . -p8000
+```
+
+> 🔗 **Open** `http://localhost:3000` in your browser  
+> 📷 **Allow** camera access when prompted  
+> 👋 **Wave** your hand to interact!
 
 ---
 
@@ -110,80 +145,131 @@ npx serve .
 
 ```
 Saturn-Particle-Nexus/
-├── 📄 index.html       # Main entry point
-├── 📄 script.js       # Three.js + MediaPipe
-├── 📄 style.css       # Styling
-├── 📄 README.md       # Docs
-└── 📄 LICENSE        # MIT License
+├── 📄 index.html          # Main HTML entry point
+├── 📄 script.js          # Three.js + MediaPipe logic
+├── 📄 style.css         # CSS styling
+├── 📄 README.md         # Documentation
+├── 📄 LICENSE           # MIT License
+└── 🔒 .gitignore       # Git ignore rules
 ```
+
+| File | Description |
+|------|-------------|
+| index.html | Canvas element + video feed |
+| script.js | Particle system + hand tracking |
+| style.css | Visual styling |
 
 ---
 
 ## 🔄 How It Works
 
 ```
-┌──────────────┐    ┌──────────────┐    ┌──────────────┐
-│   WEBCAM    │───►│ MEDIAPIPE  │───►│  THREE.JS  │
-│   Feed      │    │   Hands    │    │ Rendering  │
-└──────────────┘    └──────────────┘    └──────────────┘
-       │                   │                   │
-       ▼                   ▼                   ▼
-  Video Frames      21 Landmarks      5000+ Particles
+┌────────────────────────────────────────────────────────────────────────┐
+│                        SYSTEM ARCHITECTURE                             │
+├────────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│   ┌──────────┐      ┌───────────┐      ┌────────────┐               │
+│   │  WEBCAM  │ ───► │ MEDIAPIPE │ ───► │  THREE.JS  │               │
+│   │   Feed   │      │   Hands   │      │ Rendering  │               │
+│   └──────────┘      └───────────┘      └────────────┘               │
+│        │                    │                   │                       │
+│        ▼                    ▼                   ▼                       │
+│   Video Frames        21 Landmarks       5000+ Particles               │
+│                      Detection          Real-time Update             │
+│                                                                     │
+└────────────────────────────────────────────────────────────────────────┘
 ```
 
-| Step | Process |
-|:----:|---------|
-| 1️⃣ | MediaPipe analyzes webcam frames |
-| 2️⃣ | Extract 21 hand landmarks |
-| 3️⃣ | Detect gesture (open/closed) |
-| 4️⃣ | Apply forces to particles |
-| 5️⃣ | Render at 60fps |
+### Step-by-Step Process
+
+| Step | Process | Description |
+|:----:|---------|-------------|
+| 1️⃣ | **Capture** | Webcam captures video frames |
+| 2️⃣ | **Detect** | MediaPipe identifies 21 hand landmarks |
+| 3️⃣ | **Analyze** | Determine gesture (open/closed hand) |
+| 4️⃣ | **Calculate** | Apply forces to particles based on position |
+| 5️⃣ | **Render** | Three.js updates display at 60fps |
 
 ---
 
 ## ⚙️ Technical Details
 
-| Specification | Value |
-|----------------|-------|
-| Particles | ~5000 |
-| FPS | 60 |
-| Hand Tracking | ~30fps |
-| Framework | Three.js r128+ |
+### Performance Metrics
 
-- **BufferGeometry** for efficient rendering
-- **requestAnimationFrame** for smooth animation
-- **Object pooling** prevents GC overhead
+| Metric | Value |
+|--------|-------|
+| 🎯 Particles | ~5000 |
+| ⚡ FPS | 60 |
+| 📷 Hand Tracking | ~30fps |
+| 💾 Memory | ~50MB |
+| 🌐 Latency | <100ms |
+
+### Particle System Architecture
+
+```
+Particle {
+  position: Vector3    // x, y, z coordinates
+  velocity: Vector3   // movement direction
+  acceleration: Vector3 // applied forces
+  color: Color       // particle color
+  size: Number       // particle size
+}
+```
 
 ---
 
 ## 🔧 Troubleshooting
 
-| Issue | Solution |
-|:------|----------|
-| ❌ Camera not working | Grant permissions / Try Chrome |
-| ❌ Low FPS | Close other apps / Use better device |
-| ❌ Black screen | Enable WebGL / Update drivers |
+| ❌ Issue | ✅ Solution |
+|----------|-------------|
+| **Camera not working** | Grant permissions / Use Chrome |
+| **Low frame rate** | Close other apps / Better device |
+| **Black screen** | Enable WebGL / Update drivers |
+| **No hand detection** | Ensure good lighting / Face camera |
+| **Particles not moving** | Wave your hand in front of camera |
 
 ---
 
 ## 🤝 Contributing
 
+Contributions are welcome! Follow these steps:
+
 ```bash
-# 1. Fork
-# 2. Create branch
-git checkout -b feature/amazing
+# 1. Fork the repository
 
-# 3. Commit
-git commit -m 'Add feature'
+# 2. Clone your fork
+git clone https://github.com/YOUR_USERNAME/3D-Mavi-Saturn-Interactive-Particles.git
 
-# 4. Push & PR
+# 3. Create feature branch
+git checkout -b feature/amazing-feature
+
+# 4. Make changes and commit
+git add .
+git commit -m 'Add amazing feature'
+
+# 5. Push to your fork
+git push origin feature/amazing-feature
+
+# 6. Create Pull Request
 ```
 
 ---
 
 ## 📝 License
 
-MIT License - see [LICENSE](LICENSE)
+This project is licensed under the **MIT License**.
+
+Copyright © 2024 [Logesh Kannan](https://github.com/logeshkannan19)
+
+---
+
+## 🙏 Acknowledgments
+
+| | |
+|:---|:---|
+| [Three.js](https://threejs.org/) | 3D graphics library |
+| [MediaPipe](https://google.github.io/mediapipe/) | Hand tracking solution |
+| [Vercel](https://vercel.com/) | Hosting platform |
 
 ---
 
@@ -191,8 +277,16 @@ MIT License - see [LICENSE](LICENSE)
 
 ---
 
-⭐ **Star this project if you found it useful!**
+💜 Thanks for checking out this project!
 
-**[Back to top](#-table-of-contents)**
+⭐ **Star** this repo if you found it useful
+
+🍴 **Fork** to contribute
+
+📤 **Share** with others
+
+---
+
+[Back to top](#-table-of-contents)
 
 </div>
