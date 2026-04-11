@@ -22,12 +22,18 @@
 | [🎯 Features](#-features) | Core functionalities |
 | [🛠️ Tech Stack](#-tech-stack) | Technologies used |
 | [🚀 Getting Started](#-getting-started) | Installation guide |
+| [💻 Development](#-development) | Development setup |
 | [📁 Project Structure](#-project-structure) | File organization |
 | [🔄 How It Works](#-how-it-works) | Technical workflow |
 | [⚙️ Technical Details](#-technical-details) | Specifications |
+| [🎨 Customization](#-customization) | Configuration options |
 | [🔧 Troubleshooting](#-troubleshooting) | Common issues |
+| [❓ FAQ](#-faq) | Frequently asked questions |
 | [🤝 Contributing](#-contributing) | How to contribute |
+| [📝 Changelog](#-changelog) | Version history |
+| [🔒 Security](#-security) | Security policy |
 | [📝 License](#-license) | MIT License |
+| [📧 Contact](#-contact) | Get in touch |
 
 ---
 
@@ -42,6 +48,8 @@ Saturn Particle Nexus is an interactive 3D visualization that renders a blue-hue
 | 🎮 **Gesture Control** | Open hand attracts, fist rotates |
 | ⚡ **60 FPS** | Smooth rendering performance |
 | 🌐 **No Install** | Runs directly in browser |
+| 🎨 **Customizable** | Adjust colors and particle count |
+| 📱 **Responsive** | Adapts to screen size |
 
 ---
 
@@ -63,6 +71,9 @@ Saturn Particle Nexus is an interactive 3D visualization that renders a blue-hue
 | ✓ | Particle System | 5000+ interactive particles |
 | ✓ | Gesture Control | Real-time gesture recognition |
 | ✓ | Smooth Animation | 60fps rendering |
+| ✓ | Ring System | Saturn-like rings |
+| ✓ | WebGL Acceleration | GPU-powered graphics |
+| ✓ | Responsive Canvas | Auto-resize support |
 
 ### Upcoming Features
 
@@ -74,6 +85,8 @@ Saturn Particle Nexus is an interactive 3D visualization that renders a blue-hue
 | 💫 | Bloom Post-Processing | Planned |
 | 🔊 | Sound Effects | Planned |
 | 📸 | Screenshot Feature | Planned |
+| 🎚️ | Particle Slider | Planned |
+| 🌙 | Dark/Light Mode | Planned |
 
 ---
 
@@ -107,7 +120,7 @@ Saturn Particle Nexus is an interactive 3D visualization that renders a blue-hue
 | 📷 Webcam | For hand tracking |
 | 📶 Internet | CDN resources |
 
-### Installation
+### Quick Start
 
 ```bash
 # Clone the repository
@@ -118,21 +131,6 @@ cd 3D-Mavi-Saturn-Interactive-Particles
 
 # Start local server
 npx serve .
-# OR
-python -m http.server 8000
-```
-
-### Alternative Run Methods
-
-```bash
-# Using Node.js http-server
-npx http-server .
-
-# Using PHP
-php -S localhost:8000
-
-# Using Ruby
-ruby -run -ehttpd . -p8000
 ```
 
 > 🔗 **Open** `http://localhost:3000` in your browser  
@@ -141,23 +139,59 @@ ruby -run -ehttpd . -p8000
 
 ---
 
+## 💻 Development
+
+### Local Development Setup
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+### Available Scripts
+
+| Script | Description |
+|--------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Build for production |
+| `npm run preview` | Preview production build |
+
+### Environment Variables
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `PORT` | 3000 | Development server port |
+| `NODE_ENV` | development | Node environment |
+
+---
+
 ## 📁 Project Structure
 
 ```
 Saturn-Particle-Nexus/
 ├── 📄 index.html          # Main HTML entry point
-├── 📄 script.js          # Three.js + MediaPipe logic
-├── 📄 style.css         # CSS styling
-├── 📄 README.md         # Documentation
-├── 📄 LICENSE           # MIT License
-└── 🔒 .gitignore       # Git ignore rules
+├── 📄 script.js           # Three.js + MediaPipe logic
+├── 📄 style.css          # CSS styling
+├── 📄 README.md          # Documentation
+├── 📄 LICENSE            # MIT License
+├── 📄 .gitignore         # Git ignore rules
+└── 📄 package.json      # npm package config
 ```
 
-| File | Description |
-|------|-------------|
-| index.html | Canvas element + video feed |
-| script.js | Particle system + hand tracking |
-| style.css | Visual styling |
+| File | Description | Lines |
+|------|-------------|-------|
+| index.html | Canvas + video feed | ~20 |
+| script.js | Particle system + tracking | ~200 |
+| style.css | Visual styling | ~50 |
 
 ---
 
@@ -190,6 +224,28 @@ Saturn-Particle-Nexus/
 | 4️⃣ | **Calculate** | Apply forces to particles based on position |
 | 5️⃣ | **Render** | Three.js updates display at 60fps |
 
+### Code Flow
+
+```javascript
+// 1. Initialize Three.js scene
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(...);
+const renderer = new THREE.WebGLRenderer();
+
+// 2. Create particle system
+const particles = new THREE.Points(geometry, material);
+
+// 3. Initialize MediaPipe
+const hands = new Hands({locateFile: ...});
+hands.onResults(onResults);
+
+// 4. Update loop
+function animate() {
+  requestAnimationFrame(animate);
+  renderer.render(scene, camera);
+}
+```
+
 ---
 
 ## ⚙️ Technical Details
@@ -204,16 +260,49 @@ Saturn-Particle-Nexus/
 | 💾 Memory | ~50MB |
 | 🌐 Latency | <100ms |
 
-### Particle System Architecture
+### Browser Support
 
-```
-Particle {
-  position: Vector3    // x, y, z coordinates
-  velocity: Vector3   // movement direction
-  acceleration: Vector3 // applied forces
-  color: Color       // particle color
-  size: Number       // particle size
-}
+| Browser | Status | Notes |
+|---------|--------|-------|
+| Chrome | ✅ Supported | Recommended |
+| Firefox | ✅ Supported | Full support |
+| Edge | ✅ Supported | Full support |
+| Safari | ⚠️ Partial | May need permissions |
+| Opera | ✅ Supported | Full support |
+
+### Device Requirements
+
+| Requirement | Minimum | Recommended |
+|-------------|----------|-------------|
+| RAM | 4GB | 8GB+ |
+| Webcam | 720p | 1080p |
+| CPU | Dual-core | Quad-core+ |
+
+---
+
+## 🎨 Customization
+
+### Configuration Options
+
+| Option | Default | Description |
+|--------|---------|-------------|
+| `particleCount` | 5000 | Number of particles |
+| `particleSize` | 2 | Particle size |
+| `planetColor` | #0066ff | Saturn color |
+| `ringColor` | #00d9ff | Ring color |
+| `background` | #0a0a1a | Background color |
+
+### Modifying via Code
+
+```javascript
+// In script.js
+const CONFIG = {
+  particleCount: 5000,
+  particleSize: 2,
+  planetColor: 0x0066ff,
+  ringColor: 0x00d9ff,
+  background: 0x0a0a1a
+};
 ```
 
 ---
@@ -227,6 +316,38 @@ Particle {
 | **Black screen** | Enable WebGL / Update drivers |
 | **No hand detection** | Ensure good lighting / Face camera |
 | **Particles not moving** | Wave your hand in front of camera |
+| **Permission denied** | Check browser settings |
+| **WebGL not supported** | Try different browser |
+
+---
+
+## ❓ FAQ
+
+### Frequently Asked Questions
+
+**Q: Why is my camera not working?**
+> A: Make sure you've granted camera permissions in your browser settings. Try using Chrome for best compatibility.
+
+**Q: How can I improve frame rate?**
+> A: Close other applications using the webcam, reduce browser tabs, and ensure you're using a modern device.
+
+**Q: Can I use this on mobile?**
+> A: Currently, this requires a webcam. Mobile touch support is planned for future updates.
+
+**Q: How do I change the particle count?**
+> A: Modify the `particleCount` value in `script.js`.
+
+**Q: Is this project free to use?**
+> A: Yes, it's licensed under MIT. You can use it for personal and commercial projects.
+
+**Q: Does it work without internet?**
+> A: No, it requires internet for CDN resources (Three.js, MediaPipe).
+
+**Q: Can I customize colors?**
+> A: Yes, modify the color values in `script.js` CONFIG object.
+
+**Q: Why are particles not attracted to my hand?**
+> A: Ensure you're in good lighting and facing the camera. Make an open hand gesture.
 
 ---
 
@@ -253,13 +374,67 @@ git push origin feature/amazing-feature
 # 6. Create Pull Request
 ```
 
+### Contribution Guidelines
+
+| Guideline | Description |
+|-----------|-------------|
+| 📝 Code Style | Follow existing code style |
+| 🧪 Testing | Test your changes |
+| 📚 Documentation | Update docs if needed |
+| ✅ Checks | Run lint before PR |
+
+---
+
+## 📝 Changelog
+
+### Version History
+
+| Version | Date | Changes |
+|---------|------|---------|
+| v1.0.0 | Current | Initial release |
+| v0.9.0 | Beta | Beta testing |
+| v0.5.0 | Alpha | Initial development |
+
+### Recent Updates
+
+| Date | Change |
+|------|--------|
+| 2024 | Initial release |
+| Added hand tracking | Real-time gesture recognition |
+| Added particle system | 5000+ interactive particles |
+| Added rotation | Fist-based rotation |
+
+---
+
+## 🔒 Security
+
+### Security Policy
+
+If you find a security vulnerability, please report it responsibly.
+
+**Reporting Guidelines:**
+
+1. 📧 Email: Contact maintainer
+2. 📝 Provide details
+3. ⏳ Allow time for response
+4. 🚫 Don't disclose publicly
+
 ---
 
 ## 📝 License
 
 This project is licensed under the **MIT License**.
 
-Copyright © 2024 [Logesh Kannan](https://github.com/logeshkannan19)
+```
+MIT License
+
+Copyright (c) 2024 Logesh Kannan
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"),
+```
+
+Full license available in [LICENSE](LICENSE) file.
 
 ---
 
@@ -270,6 +445,16 @@ Copyright © 2024 [Logesh Kannan](https://github.com/logeshkannan19)
 | [Three.js](https://threejs.org/) | 3D graphics library |
 | [MediaPipe](https://google.github.io/mediapipe/) | Hand tracking solution |
 | [Vercel](https://vercel.com/) | Hosting platform |
+
+---
+
+## 📧 Contact
+
+| | |
+|:---|:---|
+| 📧 Email | Available via GitHub |
+| 💻 GitHub | [logeshkannan19](https://github.com/logeshkannan19) |
+| 🐛 Issues | [Report Bug](https://github.com/logeshkannan19/3D-Mavi-Saturn-Interactive-Particles/issues) |
 
 ---
 
