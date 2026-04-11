@@ -1,14 +1,24 @@
 <div align="center">
-  <img src="https://via.placeholder.com/800x400/1a1a2e/00d9ff?text=Saturn+Particle+Nexus" alt="Saturn Particle Nexus Preview" width="800"/>
-  <h1>Saturn Particle Nexus</h1>
+  <img src="https://via.placeholder.com/900x450/0a0a1a/00d9ff?text=SATURN+PARTICLE+NEXUS" alt="Saturn Particle Nexus" width="900"/>
+  <h1>🪐 Saturn Particle Nexus</h1>
   <p>A browser-based 3D visualization of Saturn featuring interactive particle physics and real-time hand tracking.</p>
-  <a href="https://saturn-particle-nexus.vercel.app"><img src="https://img.shields.io/badge/Live-Demo-00d9ff?style=for-the-badge" alt="Live Demo"/></a>
-  <a href="https://github.com/logeshkannan19/3D-Mavi-Saturn-Interactive-Particles/stargazers"><img src="https://img.shields.io/github/stars/logeshkannan19/3D-Mavi-Saturn-Interactive-Particles?style=social" alt="Stars"/></a>
+  <br>
+  <a href="https://saturn-particle-nexus.vercel.app"><img src="https://img.shields.io/badge/LIVE-DEMO-00d9ff?style=for-the-badge&color=00d9ff" alt="Live Demo"/></a>
+  <a href="https://github.com/logeshkannan19/3D-Mavi-Saturn-Interactive-Particles/stargazers"><img src="https://img.shields.io/github/stars/logeshkannan19/3D-Mavi-Saturn-Interactive-Particles?style=social&color=00d9ff" alt="Stars"/></a>
+  <a href="https://github.com/logeshkannan19/3D-Mavi-Saturn-Interactive-Particles/forks"><img src="https://img.shields.io/github/forks/logeshkannan19/3D-Mavi-Saturn-Interactive-Particles?style=social&color=00d9ff" alt="Forks"/></a>
 </div>
 
 ---
 
-## Table of Contents
+<p align="center">
+<img src="https://img.shields.io/badge/Three.js-000000?style=flat&logo=three.js" height="24"/>
+<img src="https://img.shields.io/badge/MediaPipe-00bcd4?style=flat" height="24"/>
+<img src="https://img.shields.io/badge/License-MIT-00d9ff?style=flat" height="24"/>
+</p>
+
+---
+
+## 📋 Table of Contents
 
 - [Overview](#overview)
 - [Features](#features)
@@ -20,61 +30,66 @@
 - [Troubleshooting](#troubleshooting)
 - [Contributing](#contributing)
 - [License](#license)
-- [Acknowledgments](#acknowledgments)
 
 ---
 
-## Overview
+## 🌟 Overview
 
-Saturn Particle Nexus is an interactive 3D visualization that renders a blue-hued Saturn with its ring system using Three.js. The project integrates MediaPipe Hands for real-time hand tracking, allowing users to interact with particle dynamics through webcam gestures. This demonstrates seamless integration of computer vision with 3D graphics, creating an immersive experience where hand gestures control particle behavior in real time.
+Saturn Particle Nexus is an interactive 3D visualization that renders a blue-hued Saturn with its ring system using Three.js. The project integrates MediaPipe Hands for real-time hand tracking, allowing users to interact with particle dynamics through webcam gestures.
+
+> **✨ Experience the future of interaction** - Control cosmic particles with just your hands!
 
 ### Key Highlights
 
-- Real-time hand gesture recognition
-- Interactive particle physics system
-- Smooth 60fps rendering
-- No installation required
+| ✨ Real-time Hand Tracking | 🌀 Interactive Particles | 🎮 No Installation |
+|--------------------------|----------------------|-------------------|
+| MediaPipe-powered gesture recognition | 5000+ physics-driven particles | Browser-based |
 
 ---
 
-## Features
+## 🎯 Features
 
 | Gesture | Action | Description |
-|---------|--------|-------------|
-| 🖐️ Open Hand | Attract particles | Particles flow toward your hand position, creating a magnetic effect |
-| ✊ Closed Fist | Rotate view | Rotate the planet and rings by moving your fist |
+|:-------:|--------|-------------|
+| 🖐️ | **Attract Particles** | Particles flow toward your hand position |
+| ✊ | **Rotate View** | Rotate the planet and rings |
 
 ### Upcoming Features
 
-- [ ] Particle trails with motion blur
-- [ ] Post-processing bloom effects
-- [ ] Touch support for mobile devices
-- [ ] Additional gesture controls
+- [ ] 🌈 Particle color customization
+- [ ] 📱 Mobile touch support
+- [ ] 🎬 Motion blur effects
+- [ ] 💫 Bloom post-processing
 
 ---
 
-## Tech Stack
+## 🛠️ Tech Stack
 
 <div align="center">
 
-| Technology | Purpose |
-|------------|---------|
-| <img src="https://img.shields.io/badge/Three.js-000000?style=flat&logo=three.js" height="20"/> | 3D graphics & particle system |
-| <img src="https://img.shields.io/badge/MediaPipe-00bcd4?style=flat" height="20"/> | Hand landmark detection |
-| <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5" height="20"/> | Markup |
-| <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3" height="20"/> | Styling |
+| | |
+|:---:|:---|
+| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="50"/> | **JavaScript** |
+| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="50"/> | **HTML5** |
+| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="50"/> | **CSS3** |
 
 </div>
 
+| Technology | Purpose |
+|------------|---------|
+| Three.js | 3D graphics & particle system |
+| MediaPipe Hands | Hand landmark detection |
+| WebGL | GPU-accelerated rendering |
+
 ---
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- Modern web browser with WebGL support
-- Webcam
-- Node.js (optional)
+- ✅ Modern browser with WebGL
+- ✅ Webcam
+- ✅ Node.js (optional)
 
 ### Quick Start
 
@@ -87,135 +102,97 @@ cd 3D-Mavi-Saturn-Interactive-Particles
 npx serve .
 ```
 
-Open `http://localhost:3000` in your browser and allow camera access.
-
-### Alternative Methods
-
-```bash
-# Using Python
-python -m http.server 8000
-
-# Using PHP
-php -S localhost:8000
-
-# Using Node.js
-npx http-server .
-```
+> 🔗 Open `http://localhost:3000` and allow camera access
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 Saturn-Particle-Nexus/
-├── index.html          # Main HTML with canvas and UI
-├── script.js         # Three.js rendering & MediaPipe
-├── style.css         # Visual styling
-├── README.md         # Documentation
-└── LICENSE          # MIT License
+├── 📄 index.html       # Main entry point
+├── 📄 script.js       # Three.js + MediaPipe
+├── 📄 style.css       # Styling
+├── 📄 README.md       # Docs
+└── 📄 LICENSE        # MIT License
 ```
 
 ---
 
-## How It Works
+## 🔄 How It Works
 
 ```
-┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
-│   Webcam Feed    │ ──► │  MediaPipe Hands │ ──► │   Three.js      │
-│                 │     │  Hand Tracking   │     │  Rendering     │
-└─────────────────┘     └──────────────────┘     └─────────────────┘
-        │                         │                        │
-        ▼                         ▼                        ▼
-   Video Frames          21 Landmarks           5000+ Particles
-                       Detection              Real-time Update
+┌──────────────┐    ┌──────────────┐    ┌──────────────┐
+│   WEBCAM    │───►│ MEDIAPIPE  │───►│  THREE.JS  │
+│   Feed      │    │   Hands    │    │ Rendering  │
+└──────────────┘    └──────────────┘    └──────────────┘
+       │                   │                   │
+       ▼                   ▼                   ▼
+  Video Frames      21 Landmarks      5000+ Particles
 ```
 
-### Step-by-Step Process
-
-1. **Hand Detection**: MediaPipe Hands analyzes each video frame from the webcam
-2. **Landmark Tracking**: 21 hand landmarks are extracted and mapped to 3D coordinates
-3. **Gesture Recognition**: Detects whether the hand is open or closed
-4. **Particle Physics**: Applies forces based on hand position
-5. **Rendering**: Three.js renders at 60fps
-
----
-
-## Technical Details
-
-### Particle System
-
-- Three.js `Points` with `BufferGeometry`
-- Position, velocity, acceleration per particle
-- Automatic respawn when out of bounds
-- ~5000 particles for optimal performance
-
-### Hand Tracking
-
-- Operates at ~30fps
-- 21 landmarks provide hand pose
-- Index finger tip for attraction
-- Landmark distances for fist detection
-
-### Performance
-
-- `requestAnimationFrame` for smooth rendering
-- Object pooling prevents GC overhead
-- WebGL-accelerated graphics
+| Step | Process |
+|:----:|---------|
+| 1️⃣ | MediaPipe analyzes webcam frames |
+| 2️⃣ | Extract 21 hand landmarks |
+| 3️⃣ | Detect gesture (open/closed) |
+| 4️⃣ | Apply forces to particles |
+| 5️⃣ | Render at 60fps |
 
 ---
 
-## Troubleshooting
+## ⚙️ Technical Details
 
-### ❌ Camera Not Working
+| Specification | Value |
+|----------------|-------|
+| Particles | ~5000 |
+| FPS | 60 |
+| Hand Tracking | ~30fps |
+| Framework | Three.js r128+ |
 
-- Grant camera permissions in browser
-- Check no other app uses the camera
-- Try Chrome (recommended)
-
-### ❌ Low Frame Rate
-
-- Close other webcam apps
-- Reduce browser tabs
-- Use modern device
-
-### ❌ Black Screen
-
-- Enable WebGL in browser
-- Check console errors (F12)
-- Update graphics drivers
+- **BufferGeometry** for efficient rendering
+- **requestAnimationFrame** for smooth animation
+- **Object pooling** prevents GC overhead
 
 ---
 
-## Contributing
+## 🔧 Troubleshooting
 
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing`)
-5. Open a Pull Request
+| Issue | Solution |
+|:------|----------|
+| ❌ Camera not working | Grant permissions / Try Chrome |
+| ❌ Low FPS | Close other apps / Use better device |
+| ❌ Black screen | Enable WebGL / Update drivers |
 
 ---
 
-## License
+## 🤝 Contributing
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+```bash
+# 1. Fork
+# 2. Create branch
+git checkout -b feature/amazing
+
+# 3. Commit
+git commit -m 'Add feature'
+
+# 4. Push & PR
+```
 
 ---
 
-##Acknowledgments
+## 📝 License
 
-- [Three.js](https://threejs.org/) - 3D library
-- [MediaPipe](https://google.github.io/mediapipe/) - Hand tracking
-- Inspired by particle system demos
+MIT License - see [LICENSE](LICENSE)
 
 ---
 
 <div align="center">
 
-⭐ Star this project if you found it useful!
+---
 
-[Back to top](#table-of-contents)
+⭐ **Star this project if you found it useful!**
+
+**[Back to top](#-table-of-contents)**
 
 </div>
