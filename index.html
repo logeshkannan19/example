@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saturn Particle Nexus</title>
-    <!-- Modern Typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-    <!-- MediaPipe Libraries -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -15,6 +13,121 @@
 <body>
     <div id="loading-msg">Loading system...<br><small>Please allow camera access</small></div>
     <video id="input-video" playsinline></video>
+    
+    <!-- Control Panel -->
+    <div id="control-panel">
+        <div class="panel-header">
+            <span>⚙️ Controls</span>
+            <button id="toggle-panel">▼</button>
+        </div>
+        <div class="panel-content">
+            <!-- Planet Presets -->
+            <div class="control-group">
+                <label>🪐 Planet</label>
+                <select id="planet-preset">
+                    <option value="saturn">Saturn</option>
+                    <option value="jupiter">Jupiter</option>
+                    <option value="neptune">Neptune</option>
+                    <option value="uranus">Uranus</option>
+                    <option value="custom">Custom</option>
+                </select>
+            </div>
+            
+            <!-- Colors -->
+            <div class="control-group">
+                <label>🎨 Planet Color</label>
+                <input type="color" id="planet-color" value="#0088ff">
+            </div>
+            <div class="control-group">
+                <label>💫 Ring Color</label>
+                <input type="color" id="ring-color" value="#00ffff">
+            </div>
+            <div class="control-group">
+                <label>✨ Particle Color</label>
+                <input type="color" id="particle-color" value="#00aaff">
+            </div>
+            
+            <!-- Particle Count -->
+            <div class="control-group">
+                <label>📊 Particles: <span id="particle-count-val">5000</span></label>
+                <input type="range" id="particle-count" min="1000" max="15000" value="5000" step="500">
+            </div>
+            
+            <!-- Ring Tilt -->
+            <div class="control-group">
+                <label>📐 Ring Tilt: <span id="ring-tilt-val">60°</span></label>
+                <input type="range" id="ring-tilt" min="0" max="90" value="60">
+            </div>
+            
+            <!-- Bloom Effect -->
+            <div class="control-group">
+                <label>🌟 Bloom</label>
+                <label class="switch">
+                    <input type="checkbox" id="bloom-toggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            
+            <!-- Sound -->
+            <div class="control-group">
+                <label>🔊 Sound</label>
+                <label class="switch">
+                    <input type="checkbox" id="sound-toggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            
+            <!-- Performance Mode -->
+            <div class="control-group">
+                <label>⚡ Performance Mode</label>
+                <label class="switch">
+                    <input type="checkbox" id="perf-mode">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            
+            <!-- Theme -->
+            <div class="control-group">
+                <label>🌙 Dark/Light Mode</label>
+                <label class="switch">
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            
+            <!-- Actions -->
+            <div class="control-group actions">
+                <button id="screenshot-btn">📸 Screenshot</button>
+                <button id="reset-btn">🔄 Reset</button>
+                <button id="help-btn">❓ Help</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Help Overlay -->
+    <div id="help-overlay">
+        <div class="help-content">
+            <h2>🎮 Controls Guide</h2>
+            <div class="help-section">
+                <h3>🖐️ Hand Gestures</h3>
+                <p><strong>Open Hand:</strong> Particles attract to your hand</p>
+                <p><strong>Closed Fist:</strong> Rotate planet and rings</p>
+                <p><strong>Pinch (Thumb + Index):</strong> Zoom in/out</p>
+            </div>
+            <div class="help-section">
+                <h3>⌨️ Keyboard Shortcuts</h3>
+                <p><strong>Space:</strong> Toggle auto-rotation</p>
+                <p><strong>S:</strong> Take screenshot</p>
+                <p><strong>H:</strong> Toggle help</p>
+                <p><strong>D:</strong> Toggle dark mode</p>
+                <p><strong>B:</strong> Toggle bloom</p>
+                <p><strong>R:</strong> Reset view</p>
+                <p><strong>1-4:</strong> Planet presets</p>
+            </div>
+            <button id="close-help">Got it!</button>
+        </div>
+    </div>
+    
     <script src="script.js"></script>
 </body>
 </html>

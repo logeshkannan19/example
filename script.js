@@ -1,15 +1,32 @@
-let scene, camera, renderer, saturn, rings, stars;
+let scene, camera, renderer, saturn, rings, stars, titan;
 let handGroup, handSkeleton, handPoints;
 let lastHandPos = null;
 let currentHandCenter = new THREE.Vector3(0, 0, 0); 
 let isExploded = false;
 let explosionFactor = 0;
 let shakeIntensity = 0;
+let autoRotate = true;
+let bloomEffect = false;
 
 let saturnOrigPos = [];
 let ringOrigPos = [];
 let saturnRandomDirs = [];
 let ringRandomDirs = [];
+
+let particleCount = 5000;
+let planetColor = 0x0088ff;
+let ringColor = 0x00ffff;
+let particleColor = 0x00aaff;
+
+const planetPresets = {
+    saturn: { planet: 0x0088ff, ring: 0x00ffff, particle: 0x00aaff },
+    jupiter: { planet: 0xd4a574, ring: 0xc9956c, particle: 0xe8c49a },
+    neptune: { planet: 0x4169e1, ring: 0x6495ed, particle: 0x87ceeb },
+    uranus: { planet: 0x40e0d0, ring: 0x7fffd4, particle: 0xafeeee }
+};
+
+let bloomComposer, renderScene, bloomPass;
+let audioContext, gainNode;
 
 function initThree() {
     scene = new THREE.Scene();
@@ -17,27 +34,44 @@ function initThree() {
     camera.position.z = 12; 
     scene.add(camera);
 
-    renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     document.body.appendChild(renderer.domElement);
 
-    // Saturn (Mavi Rəngdə)
+    createSaturn();
+    createRings();
+    createStars();
+    createTitan();
+    createHandVisualization();
+    setupLighting();
+    setupControls();
+    animate();
+}
+
+function createSaturn() {
+    if (saturn) scene.remove(saturn);
+    
     const saturnGeo = new THREE.SphereGeometry(4, 64, 64);
-    const saturnMat = new THREE.PointsMaterial({ color: 0x0088ff, size: 0.04 }); // Parlaq mavi
+    const saturnMat = new THREE.PointsMaterial({ color: planetColor, size: 0.04 });
     saturn = new THREE.Points(saturnGeo, saturnMat);
     scene.add(saturn);
 
+    saturnOrigPos = [];
+    saturnRandomDirs = [];
     const sPos = saturn.geometry.attributes.position.array;
     for(let i=0; i<sPos.length; i+=3) {
         saturnOrigPos.push(sPos[i], sPos[i+1], sPos[i+2]);
         saturnRandomDirs.push((Math.random() - 0.5) * 3, (Math.random() - 0.5) * 3, (Math.random() - 0.5) * 3);
     }
+}
 
-    // Halqalar (Mavi çalarlarda)
-    const ringCount = 12000;
+function createRings() {
+    if (rings) scene.remove(rings);
+    
     const ringGeo = new THREE.BufferGeometry();
-    const rPositions = new Float32Array(ringCount * 3);
-    for(let i=0; i<ringCount; i++) {
+    const rPositions = new Float32Array(particleCount * 3);
+    for(let i=0; i<particleCount; i++) {
         const r = 6.5 + Math.random() * 3.5;
         const a = Math.random() * Math.PI * 2;
         const x = Math.cos(a) * r;
@@ -46,22 +80,59 @@ function initThree() {
         rPositions[i*3] = x;
         rPositions[i*3+1] = y;
         rPositions[i*3+2] = z;
-        ringOrigPos.push(x, y, z);
-        ringRandomDirs.push((Math.random() - 0.5) * 2, (Math.random() - 0.5) * 2, (Math.random() - 0.5) * 2);
     }
     ringGeo.setAttribute('position', new THREE.BufferAttribute(rPositions, 3));
-    rings = new THREE.Points(ringGeo, new THREE.PointsMaterial({ color: 0x00ffff, size: 0.025, transparent: true, opacity: 0.6 }));
+    rings = new THREE.Points(ringGeo, new THREE.PointsMaterial({ color: ringColor, size: 0.025, transparent: true, opacity: 0.6 }));
     rings.rotation.x = Math.PI / 3;
     scene.add(rings);
 
-    // Ulduzlar
-    const starGeo = new THREE.BufferGeometry();
-    const starPos = new Float32Array(4000 * 3);
-    for(let i=0; i<4000*3; i++) starPos[i] = (Math.random()-0.5) * 1000;
-    starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
-    scene.add(new THREE.Points(starGeo, new THREE.PointsMaterial({color: 0xffffff, size: 0.4})));
+    ringOrigPos = [];
+    ringRandomDirs = [];
+    const rPos = rings.geometry.attributes.position.array;
+    for(let i=0; i<rPos.length; i+=3) {
+        ringOrigPos.push(rPos[i], rPos[i+1], rPos[i+2]);
+        ringRandomDirs.push((Math.random() - 0.5) * 2, (Math.random() - 0.5) * 2, (Math.random() - 0.5) * 2);
+    }
+}
 
-    // Skelet
+function createStars() {
+    if (stars) scene.remove(stars);
+    
+    const starGeo = new THREE.BufferGeometry();
+    const starCount = 4000;
+    const starPos = new Float32Array(starCount * 3);
+    const starSizes = new Float32Array(starCount);
+    
+    for(let i=0; i<starCount; i++) {
+        starPos[i*3] = (Math.random()-0.5) * 1000;
+        starPos[i*3+1] = (Math.random()-0.5) * 1000;
+        starPos[i*3+2] = (Math.random()-0.5) * 1000;
+        starSizes[i] = Math.random() * 0.5 + 0.2;
+    }
+    
+    starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+    starGeo.setAttribute('size', new THREE.BufferAttribute(starSizes, 1));
+    
+    stars = new THREE.Points(starGeo, new THREE.PointsMaterial({
+        color: 0xffffff, 
+        size: 0.4,
+        transparent: true,
+        opacity: 0.8
+    }));
+    scene.add(stars);
+}
+
+function createTitan() {
+    if (titan) scene.remove(titan);
+    
+    const titanGeo = new THREE.SphereGeometry(0.3, 16, 16);
+    const titanMat = new THREE.MeshBasicMaterial({ color: 0xffaa44 });
+    titan = new THREE.Mesh(titanGeo, titanMat);
+    titan.position.set(10, 2, 5);
+    scene.add(titan);
+}
+
+function createHandVisualization() {
     handGroup = new THREE.Group();
     const skeletonGeo = new THREE.BufferGeometry();
     const skeletonMat = new THREE.LineBasicMaterial({ color: 0x00aaff, transparent: true, opacity: 0.8 });
@@ -74,9 +145,189 @@ function initThree() {
     handGroup.add(handPoints);
     handGroup.position.set(0, 0, -10); 
     camera.add(handGroup);
-
     scene.add(new THREE.AmbientLight(0xffffff, 1));
-    animate();
+}
+
+function setupLighting() {
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    scene.add(ambientLight);
+    
+    const pointLight = new THREE.PointLight(0x00ffff, 1, 100);
+    pointLight.position.set(10, 10, 10);
+    scene.add(pointLight);
+}
+
+function setupControls() {
+    const panel = document.getElementById('control-panel');
+    document.querySelector('.panel-header').addEventListener('click', () => {
+        panel.classList.toggle('collapsed');
+    });
+
+    document.getElementById('planet-preset').addEventListener('change', (e) => {
+        const preset = planetPresets[e.target.value];
+        if (preset) {
+            planetColor = preset.planet;
+            ringColor = preset.ring;
+            particleColor = preset.particle;
+            document.getElementById('planet-color').value = '#' + preset.planet.toString(16).padStart(6, '0');
+            document.getElementById('ring-color').value = '#' + preset.ring.toString(16).padStart(6, '0');
+            document.getElementById('particle-color').value = '#' + preset.particle.toString(16).padStart(6, '0');
+            updatePlanetColors();
+        }
+    });
+
+    document.getElementById('planet-color').addEventListener('input', (e) => {
+        planetColor = parseInt(e.target.value.replace('#', ''), 16);
+        updatePlanetColors();
+    });
+
+    document.getElementById('ring-color').addEventListener('input', (e) => {
+        ringColor = parseInt(e.target.value.replace('#', ''), 16);
+        if (rings) rings.material.color.setHex(ringColor);
+    });
+
+    document.getElementById('particle-color').addEventListener('input', (e) => {
+        particleColor = parseInt(e.target.value.replace('#', ''), 16);
+    });
+
+    document.getElementById('particle-count').addEventListener('input', (e) => {
+        particleCount = parseInt(e.target.value);
+        document.getElementById('particle-count-val').textContent = particleCount;
+        createRings();
+    });
+
+    document.getElementById('ring-tilt').addEventListener('input', (e) => {
+        const tilt = parseInt(e.target.value);
+        document.getElementById('ring-tilt-val').textContent = tilt + '°';
+        if (rings) rings.rotation.x = (tilt * Math.PI) / 180;
+    });
+
+    document.getElementById('bloom-toggle').addEventListener('change', (e) => {
+        bloomEffect = e.target.checked;
+    });
+
+    document.getElementById('sound-toggle').addEventListener('change', (e) => {
+        if (e.target.checked) initAudio();
+        else if (audioContext) audioContext.close();
+    });
+
+    document.getElementById('perf-mode').addEventListener('change', (e) => {
+        if (e.target.checked) {
+            renderer.setPixelRatio(1);
+            if (stars) stars.visible = false;
+        } else {
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            if (stars) stars.visible = true;
+        }
+    });
+
+    document.getElementById('theme-toggle').addEventListener('change', (e) => {
+        document.body.classList.toggle('light-mode', e.target.checked);
+    });
+
+    document.getElementById('screenshot-btn').addEventListener('click', takeScreenshot);
+    document.getElementById('reset-btn').addEventListener('click', resetView);
+    document.getElementById('help-btn').addEventListener('click', () => {
+        document.getElementById('help-overlay').classList.add('visible');
+    });
+    document.getElementById('close-help').addEventListener('click', () => {
+        document.getElementById('help-overlay').classList.remove('visible');
+    });
+
+    setupKeyboardControls();
+}
+
+function updatePlanetColors() {
+    if (saturn) saturn.material.color.setHex(planetColor);
+    if (rings) rings.material.color.setHex(ringColor);
+}
+
+function setupKeyboardControls() {
+    document.addEventListener('keydown', (e) => {
+        switch(e.key.toLowerCase()) {
+            case ' ':
+                autoRotate = !autoRotate;
+                break;
+            case 's':
+                takeScreenshot();
+                break;
+            case 'h':
+                document.getElementById('help-overlay').classList.toggle('visible');
+                break;
+            case 'd':
+                document.getElementById('theme-toggle').click();
+                break;
+            case 'b':
+                document.getElementById('bloom-toggle').click();
+                break;
+            case 'r':
+                resetView();
+                break;
+            case '1':
+                document.getElementById('planet-preset').value = 'saturn';
+                document.getElementById('planet-preset').dispatchEvent(new Event('change'));
+                break;
+            case '2':
+                document.getElementById('planet-preset').value = 'jupiter';
+                document.getElementById('planet-preset').dispatchEvent(new Event('change'));
+                break;
+            case '3':
+                document.getElementById('planet-preset').value = 'neptune';
+                document.getElementById('planet-preset').dispatchEvent(new Event('change'));
+                break;
+            case '4':
+                document.getElementById('planet-preset').value = 'uranus';
+                document.getElementById('planet-preset').dispatchEvent(new Event('change'));
+                break;
+        }
+    });
+}
+
+function takeScreenshot() {
+    renderer.render(scene, camera);
+    const link = document.createElement('a');
+    link.download = 'saturn-particle-nexus.png';
+    link.href = renderer.domElement.toDataURL('image/png');
+    link.click();
+    playSound(800, 0.1);
+}
+
+function resetView() {
+    camera.position.set(0, 0, 12);
+    camera.rotation.set(0, 0, 0);
+    isExploded = false;
+    explosionFactor = 0;
+    if (saturn) saturn.rotation.set(0, 0, 0);
+    if (rings) rings.rotation.set(Math.PI/3, 0, 0);
+    updateExplosion();
+    playSound(400, 0.15);
+}
+
+function initAudio() {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    gainNode = audioContext.createGain();
+    gainNode.connect(audioContext.destination);
+    gainNode.gain.value = 0.1;
+}
+
+function playSound(freq, duration) {
+    if (!audioContext) return;
+    if (audioContext.state === 'suspended') audioContext.resume();
+    
+    const osc = audioContext.createOscillator();
+    const env = audioContext.createGain();
+    
+    osc.connect(env);
+    env.connect(gainNode);
+    
+    osc.frequency.value = freq;
+    osc.type = 'sine';
+    
+    env.gain.setValueAtTime(0.3, audioContext.currentTime);
+    env.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+    
+    osc.start();
+    osc.stop(audioContext.currentTime + duration);
 }
 
 function isHandFist(landmarks) {
@@ -103,7 +354,6 @@ function updateExplosion() {
         handGroup.localToWorld(attractionVector);
     }
 
-    // Saturn hissəcikləri
     for(let i=0; i<saturnAttr.count; i++) {
         const i3 = i * 3;
         let x = saturnOrigPos[i3] + saturnRandomDirs[i3] * explosionFactor;
@@ -111,7 +361,6 @@ function updateExplosion() {
         let z = saturnOrigPos[i3+2] + saturnRandomDirs[i3+2] * explosionFactor;
 
         if (isExploded) {
-            // Cəlb olunma sürəti artırıldı (0.05 -> 0.08)
             x = THREE.MathUtils.lerp(x, attractionVector.x, 0.08);
             y = THREE.MathUtils.lerp(y, attractionVector.y, 0.08);
             z = THREE.MathUtils.lerp(z, attractionVector.z, 0.08);
@@ -123,7 +372,6 @@ function updateExplosion() {
     }
     saturnAttr.needsUpdate = true;
 
-    // Halqa hissəcikləri
     for(let i=0; i<ringAttr.count; i++) {
         const i3 = i * 3;
         let x = ringOrigPos[i3] + ringRandomDirs[i3] * explosionFactor;
@@ -131,7 +379,6 @@ function updateExplosion() {
         let z = ringOrigPos[i3+2] + ringRandomDirs[i3+2] * explosionFactor;
 
         if (isExploded) {
-            // Cəlb olunma sürəti artırıldı (0.03 -> 0.06)
             x = THREE.MathUtils.lerp(x, attractionVector.x, 0.06);
             y = THREE.MathUtils.lerp(y, attractionVector.y, 0.06);
             z = THREE.MathUtils.lerp(z, attractionVector.z, 0.06);
@@ -153,13 +400,29 @@ function updateExplosion() {
     }
 }
 
+let time = 0;
 function animate() {
     requestAnimationFrame(animate);
+    time += 0.01;
+    
+    if (stars) {
+        stars.rotation.y += 0.0001;
+    }
+    
+    if (titan) {
+        const t = time * 0.5;
+        titan.position.x = Math.cos(t) * 12;
+        titan.position.z = Math.sin(t) * 12;
+        titan.position.y = Math.sin(t * 2) * 2;
+    }
+    
     updateExplosion();
-    if (!isExploded && !lastHandPos && saturn && rings) {
+    
+    if (autoRotate && !isExploded && !lastHandPos && saturn && rings) {
         saturn.rotation.y += 0.002;
         rings.rotation.z += 0.001;
     }
+    
     renderer.render(scene, camera);
 }
 
@@ -196,7 +459,6 @@ async function startApp() {
             const positions = [];
             const linePositions = [];
 
-            // Ovuc mərkəzini dinamik olaraq yeniləyirik
             currentHandCenter.set(
                 ((1 - landmarks[9].x) - 0.5) * 15,
                 -(landmarks[9].y - 0.5) * 10,
@@ -238,7 +500,6 @@ async function startApp() {
                 }
                 lastHandPos = indexTip;
             } else {
-                // ƏL AÇIQDIR - Hissəciklər əli izləyir
                 isExploded = true;
                 lastHandPos = null;
             }
@@ -269,7 +530,7 @@ async function startApp() {
                 processFrame();
             };
         } catch (err) {
-            if(loadingMsg) loadingMsg.innerText = "Xəta: Kameraya giriş mümkün deyil.";
+            if(loadingMsg) loadingMsg.innerText = "Camera access denied. Please allow camera access.";
         }
     }
 }
@@ -283,3 +544,30 @@ window.addEventListener('resize', () => {
         renderer.setSize(window.innerWidth, window.innerHeight);
     }
 });
+
+// Touch support
+let touchStartX = 0;
+let touchStartY = 0;
+
+document.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 1) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+    }
+});
+
+document.addEventListener('touchmove', (e) => {
+    if (e.touches.length === 1 && saturn && rings) {
+        const deltaX = (e.touches[0].clientX - touchStartX) * 0.01;
+        const deltaY = (e.touches[0].clientY - touchStartY) * 0.01;
+        
+        saturn.rotation.y += deltaX;
+        saturn.rotation.x += deltaY;
+        rings.rotation.y += deltaX;
+        
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+    } else if (e.touches.length === 2) {
+        e.preventDefault();
+    }
+}, { passive: false });
